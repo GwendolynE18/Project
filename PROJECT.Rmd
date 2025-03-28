@@ -1,18 +1,20 @@
 ---
-title: "PROJECT"
-output: html_document
+title: " DATA PROJECT"
+author: "Angelica and Gwendolyn Espinoza"
 date: "2025-03-28"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Including Plots
+##DATA 
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+---
+#NEXT
+
 
