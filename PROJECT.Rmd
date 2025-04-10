@@ -1,6 +1,6 @@
 ---
 title: " DATA PROJECT"
-author: "Angelica and Gwendolyn Espinoza"
+author: "Angelica Gamboa and Gwendolyn Espinoza"
 date: "2025-03-28"
 output:
   slidy_presentation: default
@@ -11,10 +11,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##DATA 
+ 
 
 
 ---
 #NEXT
-
+```{r}
+library(tidyverse)
+```
 
