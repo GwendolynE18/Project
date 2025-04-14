@@ -12,6 +12,34 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
  
+# INTRODUCTION
+The data we gathered comes from the National Center for Health Statistics (NCHS), specifically the Leading Causes of Death in the United States dataset and reported crime incidents from the City of Chicago.The NCHS dataset provided us with information on the mortality statistics across various states throughout the years with the exception of murder. 
+
+To protect the privacy of the victims, the specific locations of the incidents are not identified, but rather addresses are shown at the block level. Several variables are included in this data such as Year, X113 cause name, cause name, state, deaths, and age adjusted death rate. 
+
+
+# QUESTIONS
+1. What are the leading causes of death since 2001?
+2.
+3.
+4.
+5.
+
+# Unfiltered Data
+
+```{r}
+library(dplyr)
+data <- read.csv("NCHS_-_Leading_Causes_of_Death__United_States (1).csv")
+glimpse(data)
+```
+
+# Data Key Terms
+**Year**: Year in which the incident took place.                   
+**X113.Cause.Name**: The full, official name of the cause of death classified by the NCHS.         
+**Cause.Name**: A broader label for the cause of death.               
+**State**: The U.S. state where the data was collected.                  
+**Deaths**: The total number of deaths reported for a specific cause of death.
+**Age.adjusted.Death.Rate**: The death rate per 100,000 people, adjusted per age group for fair comparison. 
 
 
 ---
@@ -19,4 +47,23 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 ```
+
+
+
+## **Top Causes of Death Since 2001**
+```{r}
+top_causes <- data %>%
+  filter(Cause.Name != "All causes") %>% 
+  group_by(Cause.Name) %>%
+  summarise(total_deaths = sum(Deaths)) %>%
+  arrange(desc(total_deaths))
+  
+ggplot(top_causes, aes(x = total_deaths, y = reorder(Cause.Name, total_deaths))) +
+  geom_col(fill = 'purple3') +
+  labs(title = 'Top 10 Causes of Death in the U.S. Since 2001',
+       x = 'Total Deaths',
+       y = 'Cause of Death')
+```
+
+
 
