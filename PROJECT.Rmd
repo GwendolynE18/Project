@@ -18,5 +18,34 @@ knitr::opts_chunk$set(echo = TRUE)
 #NEXT
 ```{r}
 library(tidyverse)
+
 ```
 
+```{r}
+DATA <- NCHS_Leading_Causes_of_Death_United_States_1_
+glimpse(DATA)
+
+#GOING TO CLEAN DATA
+NEW_DATA <- rename(DATA, 'Causes' = 'Cause Name',
+                   'Number of Deaths' = 'Deaths')
+NEW_DATA <- NEW_DATA %>% filter(State != 'United States', Causes != 'All causes')
+NEW_DATA
+```
+
+
+
+
+```{r}
+
+GRAPHED_DATA <- NEW_DATA %>% 
+  select( State ,`Number of Deaths`, Causes) %>% 
+  group_by(Causes, State ) %>% 
+  summarize(sum(`Number of Deaths`))  %>% 
+  ggplot(aes(y = State  , x = `sum(`Number of Deaths`)` )) + geom_col()
+GRAPHED_DATA #THE DATA THAT SHOWS THE AMOUNT OF DEATHS IN EACH STATE
+
+#NOTICED MANY DEATHS IN CALIFORNIA AND GOING TO LOOK INTO IT
+
+CALIFORNIA <- NEW_DATA %>% select(State, Causes,`Number of Deaths`) %>% group_by(Causes) %>% summarize(sum(`Number of Deaths`))
+CALIFORNIA
+```
